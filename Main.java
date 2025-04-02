@@ -159,7 +159,6 @@ class Testcase8 extends MyTestcase {
     @Override
     public boolean run() {
         expect = "[REALTIME] Realtime Price Update: YG is now $500.5";
-        clearData();
         newOuput();
         StockPrice firsStockPrice = new StockPrice("YG", 500, 100, 999);
         StockPrice stockPrice = new StockPrice("YG", 500.5, 100, 999);
@@ -167,17 +166,6 @@ class Testcase8 extends MyTestcase {
         stockRealtimePriceView.onUpdate(stockPrice); 
         output = getOutput();
         return expect.equals(output);
-    }
-
-    private void clearData() {
-        newOuput();
-        StockFeeder stockFeeder = StockFeeder.getInstance();
-        stockFeeder.unregisterViewer("Jennie", stockTickerView);
-        stockFeeder.unregisterViewer("Lisa", stockTickerView);
-        stockFeeder.unregisterViewer("Jisoo", stockTickerView);
-        stockFeeder.unregisterViewer("Rose", stockTickerView);
-        stockFeeder.unregisterViewer("BK", stockTickerView);
-        String clearOutput = getOutput();
     }
 }
 
@@ -199,11 +187,11 @@ class Testcase9 extends MyTestcase {
 class Testcase10 extends MyTestcase {
     @Override
     public boolean run() {
-        expect = "[REALTIME] Realtime Price Update: FPT is now $500.5\r\n[REALTIME] Realtime Price Update: FPT is now $510.5";
+        expect = "[REALTIME] Realtime Price Update: FPT_10 is now $500.5\r\n[REALTIME] Realtime Price Update: FPT_10 is now $510.5";
         newOuput();
-        StockPrice stockPrice1 = new StockPrice("FPT", 500.5, 100, 999);
-        StockPrice stockPrice2 = new StockPrice("FPT", 510.5, 100, 999);
-        StockPrice firsStockPrice = new StockPrice("FPT", 500, 100, 999);
+        StockPrice stockPrice1 = new StockPrice("FPT_10", 500.5, 100, 999);
+        StockPrice stockPrice2 = new StockPrice("FPT_10", 510.5, 100, 999);
+        StockPrice firsStockPrice = new StockPrice("FPT_10", 500, 100, 999);
         stockRealtimePriceView.onUpdate(firsStockPrice);
         stockRealtimePriceView.onUpdate(stockPrice1);
         stockRealtimePriceView.onUpdate(stockPrice2);
@@ -215,25 +203,21 @@ class Testcase10 extends MyTestcase {
 class Testcase11 extends MyTestcase {
     @Override
     public boolean run() {
-        expect = "[REALTIME] Realtime Price Update: FPT is now $500.5";
+        expect = "[REALTIME] Realtime Price Update: FPT_11 is now $500.5";
         newOuput();
         StockRealtimePriceView stockRealtimePriceView = new StockRealtimePriceView();
-        StockPrice stockPrice = new StockPrice("FPT", 500.5, 100, 999);
-        StockPrice firsStockPrice = new StockPrice("FPT", 500, 100, 999);
-        Stock stock1 = new Stock("FPT", "FPT software");
-        Stock stock2 = new Stock("Vin", "Vin");
+        StockPrice stockPrice = new StockPrice("FPT_11", 500.5, 100, 999);
+        StockPrice firsStockPrice = new StockPrice("FPT_11", 500, 100, 999);
+        Stock stock1 = new Stock("FPT_11", "FPT software");
+        Stock stock2 = new Stock("Vin_11", "Vin");
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock1);
         stockFeeder.addStock(stock2);
-        stockFeeder.registerViewer("FPT", stockRealtimePriceView);
-        stockFeeder.registerViewer("Vin", stockRealtimePriceView);
+        stockFeeder.registerViewer("FPT_11", stockRealtimePriceView);
+        stockFeeder.registerViewer("Vin_11", stockRealtimePriceView);
         stockFeeder.notify(firsStockPrice);
         stockFeeder.notify(stockPrice);
         output = getOutput();
-        newOuput();
-        stockFeeder.unregisterViewer("FPT", stockRealtimePriceView);
-        stockFeeder.unregisterViewer("Vin", stockRealtimePriceView);
-        String clearOutput = getOutput();
         return expect.equals(output);
     }
 }
@@ -241,31 +225,23 @@ class Testcase11 extends MyTestcase {
 class Testcase12 extends MyTestcase {
     @Override
     public boolean run() {
-        expect = "[REALTIME] Realtime Price Update: FPT is now $500.5\r\n[REALTIME] Realtime Price Update: FPT is now $500.5";
+        expect = "[REALTIME] Realtime Price Update: FPT_12 is now $500.5\r\n[REALTIME] Realtime Price Update: FPT_12 is now $500.5";
         newOuput();
         StockRealtimePriceView stockRealtimePriceView1 = new StockRealtimePriceView();
         StockRealtimePriceView stockRealtimePriceView2 = new StockRealtimePriceView();
-        StockPrice stockPrice = new StockPrice("FPT", 500.5, 100, 999);
-        StockPrice firsStockPrice = new StockPrice("FPT", 500, 100, 999);
-        Stock stock1 = new Stock("FPT", "FPT software");
-        Stock stock2 = new Stock("Vin", "Vin");
+        StockPrice stockPrice = new StockPrice("FPT_12", 500.5, 100, 999);
+        StockPrice firsStockPrice = new StockPrice("FPT_12", 500, 100, 999);
+        Stock stock1 = new Stock("FPT_12", "FPT software");
+        Stock stock2 = new Stock("Vin_12", "Vin");
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock1);
         stockFeeder.addStock(stock2);
-        stockFeeder.registerViewer("FPT", stockRealtimePriceView1);
-        stockFeeder.registerViewer("FPT", stockRealtimePriceView2);
+        stockFeeder.registerViewer("FPT_12", stockRealtimePriceView1);
+        stockFeeder.registerViewer("FPT_12", stockRealtimePriceView2);
         stockFeeder.notify(firsStockPrice);
         stockFeeder.notify(stockPrice);
         output = getOutput();
-        newOuput();
-        stockFeeder.unregisterViewer("FPT", stockRealtimePriceView1);
-        stockFeeder.unregisterViewer("FPT", stockRealtimePriceView2);
-        String clearOutput = getOutput();
         return expect.equals(output);
-    }
-
-    private void clearData() {
-       
     }
 }
 
@@ -275,22 +251,18 @@ class Testcase13 extends MyTestcase {
         expect = "";
         newOuput();
         StockRealtimePriceView stockRealtimePriceView = new StockRealtimePriceView();
-        StockPrice firsStockPrice = new StockPrice("FPT", 500, 100, 999);
-        StockPrice stockPrice = new StockPrice("fake_FPT", 500.5, 100, 999);
-        Stock stock1 = new Stock("FPT", "FPT software");
-        Stock stock2 = new Stock("Vin", "Vin");
+        StockPrice firsStockPrice = new StockPrice("FPT_13", 500, 100, 999);
+        StockPrice stockPrice = new StockPrice("fake_FPT_13", 500.5, 100, 999);
+        Stock stock1 = new Stock("FPT_13", "FPT software");
+        Stock stock2 = new Stock("Vin_13", "Vin");
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock1);
         stockFeeder.addStock(stock2);
-        stockFeeder.registerViewer("FPT", stockRealtimePriceView);
-        stockFeeder.registerViewer("Vin", stockRealtimePriceView);
+        stockFeeder.registerViewer("FPT_13", stockRealtimePriceView);
+        stockFeeder.registerViewer("Vin_13", stockRealtimePriceView);
         stockFeeder.notify(firsStockPrice);
         stockFeeder.notify(stockPrice);
         output = getOutput();
-        newOuput();
-        stockFeeder.unregisterViewer("FPT", stockRealtimePriceView);
-        stockFeeder.unregisterViewer("Vin", stockRealtimePriceView);
-        String clearOutput = getOutput();
         return expect.equals(output);
     }
 }
@@ -403,6 +375,89 @@ class Testcase20 extends MyTestcase {
     }
 }
 
+class Testcase21 extends MyTestcase {
+    @Override
+    public boolean run() {
+        expect = "[ALERT] VietNam price changed significantly to $1000.0";
+        newOuput();
+        StockAlertView stockAlertView = new StockAlertView(1000, 300);
+        StockPrice stockPrice = new StockPrice("VietNam", 1000, 100, 5000);
+        stockAlertView.onUpdate(stockPrice);
+        output = getOutput();
+        return expect.equals(output);
+    }
+}
+
+class Testcase22 extends MyTestcase {
+    @Override
+    public boolean run() {
+        expect = "[ALERT] VietNam price changed significantly to $300.0";
+        newOuput();
+        StockAlertView stockAlertView = new StockAlertView(1000, 300);
+        StockPrice stockPrice = new StockPrice("VietNam", 300, 100, 5000);
+        stockAlertView.onUpdate(stockPrice);
+        output = getOutput();
+        return expect.equals(output);
+    }
+}
+
+class Testcase23 extends MyTestcase {
+    @Override
+    public boolean run() {
+        expect = "";
+        newOuput();
+        StockAlertView stockAlertView = new StockAlertView(1000, 300);
+        StockPrice stockPrice1 = new StockPrice("VietNam", 301, 100, 5000);
+        StockPrice stockPrice2 = new StockPrice("VietNam", 999, 100, 5000);
+        stockAlertView.onUpdate(stockPrice1);
+        stockAlertView.onUpdate(stockPrice2);
+        output = getOutput();
+        return expect.equals(output);
+    }
+}
+
+class Testcase24 extends MyTestcase {
+    @Override
+    public boolean run() {
+        expect = "[WARNING] Error when unregistering with 242";
+        newOuput();
+        Stock stock = new Stock("242", "hcmut");
+        StockFeeder stockFeeder = StockFeeder.getInstance();
+        stockFeeder.addStock(stock);
+        stockFeeder.registerViewer("242", stockTickerView);
+        stockFeeder.unregisterViewer("242", stockTickerView);
+        stockFeeder.unregisterViewer("242", stockTickerView);
+        output = getOutput();
+        return expect.equals(output);
+    }
+}
+
+class Testcase25 extends MyTestcase {
+    @Override
+    public boolean run() {
+        expect = "[REALTIME] Realtime Price Update: FPT_25 is now $500.5";
+        newOuput();
+        StockRealtimePriceView stockRealtimePriceView1 = new StockRealtimePriceView();
+        StockRealtimePriceView stockRealtimePriceView2 = new StockRealtimePriceView();
+        StockPrice firsStockPrice = new StockPrice("FPT_25", 500, 100, 999);
+        StockPrice stockPrice = new StockPrice("FPT_25", 500.5, 100, 999);
+        Stock stock1 = new Stock("FPT_25", "FPT software");
+        Stock stock2 = new Stock("Vin_25", "Vin");
+        StockFeeder stockFeeder = StockFeeder.getInstance();
+        stockFeeder.addStock(stock1);
+        stockFeeder.addStock(stock2);
+        stockFeeder.registerViewer("FPT_25", stockRealtimePriceView1);
+        stockFeeder.registerViewer("Vin_25", stockRealtimePriceView1);
+        stockFeeder.registerViewer("FPT_25", stockRealtimePriceView2);
+        stockFeeder.registerViewer("Vin_25", stockRealtimePriceView2);
+        stockFeeder.unregisterViewer("FPT_25", stockRealtimePriceView1);
+        stockFeeder.notify(firsStockPrice);
+        stockFeeder.notify(stockPrice);
+        output = getOutput();
+        return expect.equals(output);
+    }
+}
+
 public class Main {
     static private List<Testcase> tc_list = new ArrayList<>();
     public static void main(String[] args) {
@@ -427,6 +482,11 @@ public class Main {
         tc_list.add(new Testcase18());
         tc_list.add(new Testcase19());
         tc_list.add(new Testcase20());
+        tc_list.add(new Testcase21());
+        tc_list.add(new Testcase22());
+        tc_list.add(new Testcase23());
+        tc_list.add(new Testcase24());
+        tc_list.add(new Testcase25());
         for (int i = 0; i < tc_list.size(); ++i) {
             if (tc_list.get(i).run_and_show(i + 1)) ++score;
         }
