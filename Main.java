@@ -54,6 +54,7 @@ abstract class MyTestcase extends GetOutputStream implements Testcase {
                 return false;
             }
         } catch (Exception e) {
+            String deleteString = getOutput();
             System.out.println("Error");
             return false;
         }
