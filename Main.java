@@ -380,11 +380,13 @@ class Testcase20 extends MyTestcase {
 class Testcase21 extends MyTestcase {
     @Override
     public boolean run() {
-        expect = "[ALERT] VietNam price changed significantly to $1000.0";
+        expect = "[ALERT] VietNam price changed significantly to $1001.0";
         newOuput();
         StockAlertView stockAlertView = new StockAlertView(1000, 300);
-        StockPrice stockPrice = new StockPrice("VietNam", 1000, 100, 5000);
-        stockAlertView.onUpdate(stockPrice);
+        StockPrice stockPrice1 = new StockPrice("VietNam", 1001, 100, 5000);
+        StockPrice stockPrice2 = new StockPrice("VietNam", 999, 100, 5000);
+        stockAlertView.onUpdate(stockPrice1);
+        stockAlertView.onUpdate(stockPrice2);
         output = getOutput();
         return expect.equals(output);
     }
@@ -393,11 +395,13 @@ class Testcase21 extends MyTestcase {
 class Testcase22 extends MyTestcase {
     @Override
     public boolean run() {
-        expect = "[ALERT] VietNam price changed significantly to $300.0";
+        expect = "[ALERT] VietNam price changed significantly to $1001.0";
         newOuput();
         StockAlertView stockAlertView = new StockAlertView(1000, 300);
-        StockPrice stockPrice = new StockPrice("VietNam", 300, 100, 5000);
-        stockAlertView.onUpdate(stockPrice);
+        StockPrice stockPrice1 = new StockPrice("VietNam", 1001, 100, 5000);
+        StockPrice stockPrice2 = new StockPrice("VietNam", 999, 100, 5000);
+        stockAlertView.onUpdate(stockPrice2);
+        stockAlertView.onUpdate(stockPrice1);
         output = getOutput();
         return expect.equals(output);
     }
