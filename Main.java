@@ -229,16 +229,11 @@ class Testcase11 extends MyTestcase {
         stockFeeder.notify(firsStockPrice);
         stockFeeder.notify(stockPrice);
         output = getOutput();
-        clearData();
-        return expect.equals(output);
-    }
-
-    private void clearData() {
         newOuput();
-        StockFeeder stockFeeder = StockFeeder.getInstance();
-        stockFeeder.unregisterViewer("FPT", stockTickerView);
-        stockFeeder.unregisterViewer("Vin", stockTickerView);
+        stockFeeder.unregisterViewer("FPT", stockRealtimePriceView);
+        stockFeeder.unregisterViewer("Vin", stockRealtimePriceView);
         String clearOutput = getOutput();
+        return expect.equals(output);
     }
 }
 
@@ -261,16 +256,15 @@ class Testcase12 extends MyTestcase {
         stockFeeder.notify(firsStockPrice);
         stockFeeder.notify(stockPrice);
         output = getOutput();
-        clearData();
+        newOuput();
+        stockFeeder.unregisterViewer("FPT", stockRealtimePriceView1);
+        stockFeeder.unregisterViewer("FPT", stockRealtimePriceView2);
+        String clearOutput = getOutput();
         return expect.equals(output);
     }
 
     private void clearData() {
-        newOuput();
-        StockFeeder stockFeeder = StockFeeder.getInstance();
-        stockFeeder.unregisterViewer("FPT", stockTickerView);
-        stockFeeder.unregisterViewer("Vin", stockTickerView);
-        String clearOutput = getOutput();
+       
     }
 }
 
@@ -292,16 +286,11 @@ class Testcase13 extends MyTestcase {
         stockFeeder.notify(firsStockPrice);
         stockFeeder.notify(stockPrice);
         output = getOutput();
-        clearData();
-        return expect.equals(output);
-    }
-
-    private void clearData() {
         newOuput();
-        StockFeeder stockFeeder = StockFeeder.getInstance();
-        stockFeeder.unregisterViewer("FPT", stockTickerView);
-        stockFeeder.unregisterViewer("Vin", stockTickerView);
+        stockFeeder.unregisterViewer("FPT", stockRealtimePriceView);
+        stockFeeder.unregisterViewer("Vin", stockRealtimePriceView);
         String clearOutput = getOutput();
+        return expect.equals(output);
     }
 }
 
