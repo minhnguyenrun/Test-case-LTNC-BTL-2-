@@ -79,7 +79,7 @@ class Testcase2 extends MyTestcase {
         Stock stock = new Stock("Jennie", "rubyjane");
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock);
-        stockFeeder.registerViewer(stock.getCode(), stockTickerView);
+        stockFeeder.registerViewer("Jennie", stockTickerView);
         output = getOutput();
         return expect.equals(output);
     }
@@ -92,7 +92,7 @@ class Testcase3 extends MyTestcase {
         newOuput();
         Stock stock = new Stock("Lisa", "rockstar");
         StockFeeder stockFeeder = StockFeeder.getInstance();
-        stockFeeder.registerViewer(stock.getCode(), stockTickerView);
+        stockFeeder.registerViewer("Lisa", stockTickerView);
         output = getOutput();
         return expect.equals(output);
     }
@@ -106,8 +106,8 @@ class Testcase4 extends MyTestcase {
         Stock stock = new Stock("Jisoo", "flower");
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock);
-        stockFeeder.registerViewer(stock.getCode(), stockTickerView);
-        stockFeeder.unregisterViewer(stock.getCode(), stockTickerView);
+        stockFeeder.registerViewer("Jisoo", stockTickerView);
+        stockFeeder.unregisterViewer("Jisoo", stockTickerView);
         output = getOutput();
         return expect.equals(output);
     }
@@ -121,7 +121,7 @@ class Testcase5 extends MyTestcase {
         Stock stock = new Stock("Rose", "APT");
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock);
-        stockFeeder.unregisterViewer(stock.getCode(), stockTickerView);
+        stockFeeder.unregisterViewer("Rose", stockTickerView);
         output = getOutput();
         return expect.equals(output);
     }
@@ -134,7 +134,7 @@ class Testcase6 extends MyTestcase {
         newOuput();
         Stock stock = new Stock("BK", "hcmut");
         StockFeeder stockFeeder = StockFeeder.getInstance();
-        stockFeeder.registerViewer(stock.getCode(), stockTickerView);
+        stockFeeder.registerViewer("BK", stockTickerView);
         output = getOutput();
         return expect.equals(output);
     }
@@ -148,7 +148,7 @@ class Testcase7 extends MyTestcase {
         Stock stock = new Stock("BK", "hcmut");
         StockFeeder stockFeeder = StockFeeder.getInstance();
         StockViewer stockViewer = new StockTickerView();
-        stockFeeder.unregisterViewer(stock.getCode(), stockViewer);
+        stockFeeder.unregisterViewer("BK", stockViewer);
         output = getOutput();
         return expect.equals(output);
     }
@@ -217,8 +217,8 @@ class Testcase11 extends MyTestcase {
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock1);
         stockFeeder.addStock(stock2);
-        stockFeeder.registerViewer(stock1.getCode(), stockRealtimePriceView);
-        stockFeeder.registerViewer(stock2.getCode(), stockRealtimePriceView);
+        stockFeeder.registerViewer("FPT", stockRealtimePriceView);
+        stockFeeder.registerViewer("Vin", stockRealtimePriceView);
         stockFeeder.notify(stockPrice);
         output = getOutput();
         clearData();
@@ -247,8 +247,8 @@ class Testcase12 extends MyTestcase {
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock1);
         stockFeeder.addStock(stock2);
-        stockFeeder.registerViewer(stock1.getCode(), stockRealtimePriceView1);
-        stockFeeder.registerViewer(stock1.getCode(), stockRealtimePriceView2);
+        stockFeeder.registerViewer("FPT", stockRealtimePriceView1);
+        stockFeeder.registerViewer("FPT", stockRealtimePriceView2);
         stockFeeder.notify(stockPrice);
         output = getOutput();
         clearData();
@@ -276,8 +276,8 @@ class Testcase13 extends MyTestcase {
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock1);
         stockFeeder.addStock(stock2);
-        stockFeeder.registerViewer(stock1.getCode(), stockRealtimePriceView);
-        stockFeeder.registerViewer(stock2.getCode(), stockRealtimePriceView);
+        stockFeeder.registerViewer("FPT", stockRealtimePriceView);
+        stockFeeder.registerViewer("Vin", stockRealtimePriceView);
         stockFeeder.notify(stockPrice);
         output = getOutput();
         clearData();
