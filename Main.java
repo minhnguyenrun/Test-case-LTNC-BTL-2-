@@ -280,6 +280,7 @@ class Testcase13 extends MyTestcase {
         expect = "";
         newOuput();
         StockRealtimePriceView stockRealtimePriceView = new StockRealtimePriceView();
+        StockPrice firsStockPrice = new StockPrice("FPT", 500, 100, 999);
         StockPrice stockPrice = new StockPrice("fake_FPT", 500.5, 100, 999);
         Stock stock1 = new Stock("FPT", "FPT software");
         Stock stock2 = new Stock("Vin", "Vin");
@@ -288,6 +289,7 @@ class Testcase13 extends MyTestcase {
         stockFeeder.addStock(stock2);
         stockFeeder.registerViewer("FPT", stockRealtimePriceView);
         stockFeeder.registerViewer("Vin", stockRealtimePriceView);
+        stockFeeder.notify(firsStockPrice);
         stockFeeder.notify(stockPrice);
         output = getOutput();
         clearData();
