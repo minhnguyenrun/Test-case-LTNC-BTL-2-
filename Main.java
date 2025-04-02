@@ -255,9 +255,11 @@ class Testcase13 extends MyTestcase {
         StockPrice stockPrice = new StockPrice("fake_FPT_13", 500.5, 100, 999);
         Stock stock1 = new Stock("FPT_13", "FPT software");
         Stock stock2 = new Stock("Vin_13", "Vin");
+        Stock fake_stock = new Stock("fake_FPT_13", "FPT software");
         StockFeeder stockFeeder = StockFeeder.getInstance();
         stockFeeder.addStock(stock1);
         stockFeeder.addStock(stock2);
+        stockFeeder.addStock(fake_stock);
         stockFeeder.registerViewer("FPT_13", stockRealtimePriceView);
         stockFeeder.registerViewer("Vin_13", stockRealtimePriceView);
         stockFeeder.notify(firsStockPrice);
