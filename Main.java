@@ -501,5 +501,6 @@ public class Main {
             if (tc_list.get(i).run_and_show(i + 1)) ++score;
         }
         System.out.println("Score: " + score + "/" + tc_list.size());
+        System.exit(0);
     }
 }
