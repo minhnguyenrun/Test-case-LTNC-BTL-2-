@@ -131,11 +131,15 @@ class Testcase5 extends MyTestcase {
 class Testcase6 extends MyTestcase {
     @Override
     public boolean run() {
-        expect = "[WARNING] Error when registering with BK";
+        expect = "[WARNING] Error when registering with BK_6";
         newOuput();
-        Stock stock = new Stock("BK", "hcmut");
+        Stock stock = new Stock("BK_6", "hcmut");
         StockFeeder stockFeeder = StockFeeder.getInstance();
-        stockFeeder.registerViewer("BK", stockTickerView);
+        stockFeeder.addStock(stock);
+        StockTickerView stockTickerView1 = new StockTickerView();
+        StockTickerView stockTickerView2 = new StockTickerView();
+        stockFeeder.registerViewer("BK_6", stockTickerView1);
+        stockFeeder.registerViewer("BK_6", stockTickerView2);
         output = getOutput();
         return expect.equals(output);
     }
@@ -144,12 +148,12 @@ class Testcase6 extends MyTestcase {
 class Testcase7 extends MyTestcase {
     @Override
     public boolean run() {
-        expect = "[WARNING] Error when unregistering with BK";
+        expect = "[WARNING] Error when unregistering with BK_7";
         newOuput();
-        Stock stock = new Stock("BK", "hcmut");
+        Stock stock = new Stock("BK_7", "hcmut");
         StockFeeder stockFeeder = StockFeeder.getInstance();
         StockViewer stockViewer = new StockTickerView();
-        stockFeeder.unregisterViewer("BK", stockViewer);
+        stockFeeder.unregisterViewer("BK_7", stockViewer);
         output = getOutput();
         return expect.equals(output);
     }
@@ -225,10 +229,12 @@ class Testcase11 extends MyTestcase {
 class Testcase12 extends MyTestcase {
     @Override
     public boolean run() {
-        expect = "[REALTIME] Realtime Price Update: FPT_12 is now $500.5\r\n[REALTIME] Realtime Price Update: FPT_12 is now $500.5";
+        expect = "[ALERT] FPT_12 price changed significantly to $500.0\r\n" + //
+                 "[REALTIME] Realtime Price Update: FPT_12 is now $500.5\r\n" + //
+                 "[ALERT] FPT_12 price changed significantly to $500.5";
         newOuput();
         StockRealtimePriceView stockRealtimePriceView1 = new StockRealtimePriceView();
-        StockRealtimePriceView stockRealtimePriceView2 = new StockRealtimePriceView();
+        StockAlertView stockAlertView1 = new StockAlertView(0, 0);
         StockPrice stockPrice = new StockPrice("FPT_12", 500.5, 100, 999);
         StockPrice firsStockPrice = new StockPrice("FPT_12", 500, 100, 999);
         Stock stock1 = new Stock("FPT_12", "FPT software");
@@ -237,7 +243,7 @@ class Testcase12 extends MyTestcase {
         stockFeeder.addStock(stock1);
         stockFeeder.addStock(stock2);
         stockFeeder.registerViewer("FPT_12", stockRealtimePriceView1);
-        stockFeeder.registerViewer("FPT_12", stockRealtimePriceView2);
+        stockFeeder.registerViewer("FPT_12", stockAlertView1);
         stockFeeder.notify(firsStockPrice);
         stockFeeder.notify(stockPrice);
         output = getOutput();
@@ -445,10 +451,11 @@ class Testcase24 extends MyTestcase {
 class Testcase25 extends MyTestcase {
     @Override
     public boolean run() {
-        expect = "[REALTIME] Realtime Price Update: FPT_25 is now $500.5";
+        expect = "[ALERT] FPT_25 price changed significantly to $500.0\r\n" + //
+                 "[ALERT] FPT_25 price changed significantly to $500.5";
         newOuput();
         StockRealtimePriceView stockRealtimePriceView1 = new StockRealtimePriceView();
-        StockRealtimePriceView stockRealtimePriceView2 = new StockRealtimePriceView();
+        StockAlertView stockAlertView1 = new StockAlertView(0, 0);
         StockPrice firsStockPrice = new StockPrice("FPT_25", 500, 100, 999);
         StockPrice stockPrice = new StockPrice("FPT_25", 500.5, 100, 999);
         Stock stock1 = new Stock("FPT_25", "FPT software");
@@ -458,8 +465,8 @@ class Testcase25 extends MyTestcase {
         stockFeeder.addStock(stock2);
         stockFeeder.registerViewer("FPT_25", stockRealtimePriceView1);
         stockFeeder.registerViewer("Vin_25", stockRealtimePriceView1);
-        stockFeeder.registerViewer("FPT_25", stockRealtimePriceView2);
-        stockFeeder.registerViewer("Vin_25", stockRealtimePriceView2);
+        stockFeeder.registerViewer("FPT_25", stockAlertView1);
+        stockFeeder.registerViewer("Vin_25", stockAlertView1);
         stockFeeder.unregisterViewer("FPT_25", stockRealtimePriceView1);
         stockFeeder.notify(firsStockPrice);
         stockFeeder.notify(stockPrice);
